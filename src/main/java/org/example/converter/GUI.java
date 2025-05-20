@@ -16,7 +16,7 @@ public class GUI extends JFrame {
     private final JTextField selectedFileLine;
     private final JTextField selectedSystemLine;
     private File selectedFile;
-    private String selectedSystem;
+    private CoordinateSystem selectedSystem;
 
     public GUI () {
         transformer = new Transformer();
@@ -55,7 +55,7 @@ public class GUI extends JFrame {
         selectedSystemLine.setBounds(20, 120, 150, 30);
         coordinateSystemComboBox.setBounds(175, 120, 195, 30);
         coordinateSystemComboBox.addActionListener(a ->
-                selectedSystem = (String) coordinateSystemComboBox.getSelectedItem()
+                selectedSystem = (CoordinateSystem) coordinateSystemComboBox.getSelectedItem()
         );
         add(selectedSystemLine);
         add(coordinateSystemComboBox);
@@ -71,8 +71,14 @@ public class GUI extends JFrame {
         startButton.setOpaque(true);
         startButton.setBorderPainted(false);
         startButton.addActionListener(a -> {
-            if (selectedFile != null && selectedSystem != null && !selectedSystem.isEmpty()) {
-                transformer.start(selectedFile, selectedSystem);
+            if (selectedFile != null && selectedSystem != null) {
+                try {
+                    transformer.start(selectedFile, selectedSystem);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this,
+                            e.getMessage(),
+                            "Ошибка", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
             else {
                 JOptionPane.showMessageDialog(this,

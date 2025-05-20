@@ -1,6 +1,7 @@
 package org.example.converter.system;
 
-public class AsdCoordinatesConverter {
+public class AsdCoordinatesConverter extends Converter{
+
     private static final double DEG2RAD = Math.PI / 180.0;
     private static final double RAD2DEG = 180.0 / Math.PI;
     private static final double EPSILON = 0.00001; // e-05 e-08 e-10
@@ -80,7 +81,9 @@ public class AsdCoordinatesConverter {
         }
         return tekB;
     }
-    public Point ConvertToBL(double x, double y) {
+
+    @Override
+    public Converter.Point convertToBL(double x, double y) {
 
 //        if (this._Convert)
 //            pointXY = this.Convert68_to_42(pointXY);
@@ -108,34 +111,8 @@ public class AsdCoordinatesConverter {
         a3 = yn2 * yn2 * (5.0 + 28.0 * t * t + 24.0 * t * t * t * t + 6.0 * nukv + 8.0 * nukv * t * t) / 120.0;
         double resultLon = a1 * (a2 + a3);
 
-        return new Point(
+        return new Converter.Point(
                 resultLat * RAD2DEG,
                 (resultLon + _meridian * DEG2RAD) * RAD2DEG);
-    }
-
-    public static class Point {
-        private double latitude;
-        private double longitude;
-
-        public Point(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
-
-        public double getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
-        }
     }
 }
