@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <developers>
+        <developer>
+            <id>silent_rider</id>
+            <name>Silent Rider</name>
+            <email>silent.30.rider.10@gmail.com</email>
+        </developer>
+    </developers>
+
     <groupId>org.example</groupId>
     <artifactId>GeoJSONConverter</artifactId>
     <version>1.0</version>
