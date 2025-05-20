@@ -10,17 +10,17 @@ public class AsdCoordinatesConverter extends Converter{
     private static final double EKV2 = 0.00673853;
     private static final double _dx = -5700190.96788101;
     private static final double _dy = -99706.1503331292;
-    private static final double _dz = 0;
+//    private static final double _dz = 0;
     private static final double _meridian = 117;
-    private static final double _Xo68 = 0;
-    private static final double _Yo68 = 0;
-    private static final double _CosB = 0;
-    private static final double _SinB = 0;
-    private static final double _Xo42 = 0;
-    private static final double _Yo42 = 0;
-    private static final double _ScaleX = 1;
-    private static final double _ScaleY = 1;
-    private static final boolean _Convert = false;
+//    private static final double _Xo68 = 0;
+//    private static final double _Yo68 = 0;
+//    private static final double _CosB = 0;
+//    private static final double _SinB = 0;
+//    private static final double _Xo42 = 0;
+//    private static final double _Yo42 = 0;
+//    private static final double _ScaleX = 1;
+//    private static final double _ScaleY = 1;
+//    private static final boolean _Convert = false;
 
     private double A0(double e) {
         return 1.0+3.0*e /4.0+45.0*e *e /64.0;
