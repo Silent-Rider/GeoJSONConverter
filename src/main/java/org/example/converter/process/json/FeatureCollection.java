@@ -1,8 +1,5 @@
 package org.example.converter.process.json;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import java.util.List;
 
 public class FeatureCollection {
