@@ -1,22 +1,18 @@
 package org.example.converter.process.json;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import java.util.List;
-
-@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
 public class Feature {
 
-    private List<Property> properties;
+    private String type;
+    private Properties properties;
     private Geometry geometry;
 
     public Feature () {}
 
-    public List<Property> getProperties() {
+    public Properties getProperties() {
         return properties;
     }
 
-    public void setProperties(List<Property> properties) {
+    public void setProperties(Properties properties) {
         this.properties = properties;
     }
 
@@ -26,5 +22,13 @@ public class Feature {
 
     public void setGeometry(Geometry geometry) {
         this.geometry = geometry;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

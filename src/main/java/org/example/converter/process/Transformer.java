@@ -40,7 +40,8 @@ public class Transformer {
             if(featureCollection == null)
                 throw new RuntimeException("Возникла ошибка при десериализации");
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Возникла ошибка при десериализации", e);
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Возникла ошибка при десериализации. " + e.getMessage(), e);
         }
         for (Feature feature : featureCollection.getFeatures()) {
             Geometry geometry = feature.getGeometry();
@@ -61,7 +62,7 @@ public class Transformer {
             geometry.setCoordinates(updatedCoordinates);
         }
         try {
-            objectMapper.writeValue(file, featureCollection);
+            objectMapper.writeValue(new File(file.getName()), featureCollection);
         } catch (IOException e) {
             throw new RuntimeException("Возникла ошибка при записи в файл", e);
         }

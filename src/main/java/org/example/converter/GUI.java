@@ -24,6 +24,8 @@ public class GUI extends JFrame {
         for(CoordinateSystem coordinateSystem: CoordinateSystem.values()) {
             coordinateSystemComboBox.addItem(coordinateSystem.getName());
         }
+        coordinateSystemComboBox.setSelectedItem(null);
+
         selectedFileLine = new JTextField("Файл: не выбран");
         selectedFileLine.setEditable(false);
         selectedSystemLine = new JTextField("Координатная система: ");
@@ -54,8 +56,9 @@ public class GUI extends JFrame {
 
         selectedSystemLine.setBounds(20, 120, 150, 30);
         coordinateSystemComboBox.setBounds(175, 120, 195, 30);
-        coordinateSystemComboBox.addActionListener(a ->
-                selectedSystem = (CoordinateSystem) coordinateSystemComboBox.getSelectedItem()
+        coordinateSystemComboBox.addActionListener(a -> {
+                    selectedSystem = CoordinateSystem.values()[coordinateSystemComboBox.getSelectedIndex()];
+            }
         );
         add(selectedSystemLine);
         add(coordinateSystemComboBox);
