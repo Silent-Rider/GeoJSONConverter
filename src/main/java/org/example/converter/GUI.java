@@ -35,7 +35,7 @@ public class GUI extends JFrame {
         setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false); // можно отключить изменение размера окна
+        setResizable(false);
 
         initComponents();
     }
@@ -50,7 +50,7 @@ public class GUI extends JFrame {
         add(selectedFileLine);
 
         JButton selectFileButton = new JButton("Выбрать файл");
-        selectFileButton.setBounds(130, 60, 140, 30); // маленькая кнопка по центру
+        selectFileButton.setBounds(130, 60, 140, 30);
         selectFileButton.addActionListener(this::selectFileAction);
         add(selectFileButton);
 
@@ -74,9 +74,10 @@ public class GUI extends JFrame {
         startButton.setOpaque(true);
         startButton.setBorderPainted(false);
         startButton.addActionListener(a -> {
-            if (selectedFile != null && selectedSystem != null) {
+            if (selectedFile != null || selectedSystem != null) {
                 try {
                     transformer.start(selectedFile, selectedSystem);
+                    JOptionPane.showMessageDialog(this, "Файл успешно отконвертирован");
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,
                             e.getMessage(),

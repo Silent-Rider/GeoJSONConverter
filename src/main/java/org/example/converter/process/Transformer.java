@@ -9,6 +9,7 @@ import org.example.converter.system.AsdCoordinatesConverter;
 import org.example.converter.system.Converter;
 import org.example.converter.system.CoordinateSystem;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,7 +41,6 @@ public class Transformer {
             if(featureCollection == null)
                 throw new RuntimeException("Возникла ошибка при десериализации");
         } catch (JsonProcessingException e) {
-            System.out.println(e.getMessage());
             throw new RuntimeException("Возникла ошибка при десериализации. " + e.getMessage(), e);
         }
         for (Feature feature : featureCollection.getFeatures()) {
@@ -50,8 +50,8 @@ public class Transformer {
                         List<Double> transformed = new ArrayList<>();
                         if (coordinates.size() > 1){
                             Converter.Point point = converter.convertToBL(coordinates.get(0), coordinates.get(1));
-                            transformed.add(point.getLatitude());
                             transformed.add(point.getLongitude());
+                            transformed.add(point.getLatitude());
                             transformed.add(0.0);
                         }
                         else throw new RuntimeException("Слишком мало координат (< 2)");
@@ -66,8 +66,6 @@ public class Transformer {
         } catch (IOException e) {
             throw new RuntimeException("Возникла ошибка при записи в файл", e);
         }
-
-        System.out.println("Success! " + file.getName() + " " + system);
     }
 
     public String readFile(File file) {

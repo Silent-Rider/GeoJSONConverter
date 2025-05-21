@@ -112,7 +112,7 @@ public class AsdCoordinatesConverter extends Converter{
         double resultLon = a1 * (a2 + a3);
 
         return new Converter.Point(
-                resultLat * RAD2DEG,
-                (resultLon + _meridian * DEG2RAD) * RAD2DEG);
+                ((resultLon + _meridian * DEG2RAD) * RAD2DEG),
+                resultLat * RAD2DEG);
     }
 }

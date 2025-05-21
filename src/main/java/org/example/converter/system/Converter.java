@@ -5,19 +5,12 @@ public abstract class Converter {
     public abstract Point convertToBL(double x, double y);
 
     public static class Point {
-        private double latitude;
         private double longitude;
+        private double latitude;
 
-        public Point(double latitude, double longitude) {
-            this.latitude = latitude;
+
+        public Point(double longitude, double latitude) {
             this.longitude = longitude;
-        }
-
-        public double getLatitude() {
-            return latitude;
-        }
-
-        public void setLatitude(double latitude) {
             this.latitude = latitude;
         }
 
@@ -27,6 +20,14 @@ public abstract class Converter {
 
         public void setLongitude(double longitude) {
             this.longitude = longitude;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
         }
     }
 }
