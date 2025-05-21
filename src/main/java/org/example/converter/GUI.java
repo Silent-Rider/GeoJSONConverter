@@ -11,6 +11,8 @@ import java.io.File;
 
 public class GUI extends JFrame {
 
+    private static final String NOT_CHOSEN = "не выбран";
+
     private final JComboBox<String> coordinateSystemComboBox;
     private final Transformer transformer;
     private final JTextField selectedFileLine;
@@ -26,7 +28,7 @@ public class GUI extends JFrame {
         }
         coordinateSystemComboBox.setSelectedItem(null);
 
-        selectedFileLine = new JTextField("Файл: не выбран");
+        selectedFileLine = new JTextField("Файл: " + NOT_CHOSEN);
         selectedFileLine.setEditable(false);
         selectedSystemLine = new JTextField("Координатная система: ");
         selectedSystemLine.setEditable(false);
@@ -74,20 +76,26 @@ public class GUI extends JFrame {
         startButton.setOpaque(true);
         startButton.setBorderPainted(false);
         startButton.addActionListener(a -> {
-            if (selectedFile != null || selectedSystem != null) {
+            if (selectedFile != null && selectedSystem != null) {
                 try {
                     transformer.start(selectedFile, selectedSystem);
-                    JOptionPane.showMessageDialog(this, "Файл успешно отконвертирован");
+                    JOptionPane.showMessageDialog(this, "Файл успешно отконвертирован",
+                            "Уведомление", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,
-                            e.getMessage(),
-                            "Ошибка", JOptionPane.INFORMATION_MESSAGE);
+                            "Ошибка: " + e.getMessage(),
+                            "Ошибка", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+            else if (selectedFile == null) {
+                JOptionPane.showMessageDialog(this,
+                        "Вы не выбрали файл",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
             else {
                 JOptionPane.showMessageDialog(this,
-                        "Выбранный файл и координатная система не могут быть пустыми",
-                        "Ошибка", JOptionPane.INFORMATION_MESSAGE);
+                        "Вы не выбрали координатную систему",
+                        "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
         });
         return startButton;
@@ -101,7 +109,7 @@ public class GUI extends JFrame {
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             selectedFile = fileChooser.getSelectedFile();
-            selectedFileLine.setText(selectedFileLine.getText().replace("не выбран", selectedFile.getName()));
+            selectedFileLine.setText(selectedFileLine.getText().replace(NOT_CHOSEN, selectedFile.getName()));
         }
     }
 }
